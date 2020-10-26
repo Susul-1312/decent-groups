@@ -3,17 +3,21 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 
 var connection;
 
-const win = new BrowserWindow({
-	width: 800,
-	height: 600,
-	webPreferences: {
-		nodeIntegration: true
-	}
-});
+var win;
 
-win.loadFile('frontend/index.html');
+function createWindow() {
+	win = new BrowserWindow({
+		width: 800,
+		height: 600,
+		webPreferences: {
+			nodeIntegration: true
+		}
+	});
 
-app.whenReady().then(win);
+	win.loadFile('frontend/index.html');
+}
+
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
