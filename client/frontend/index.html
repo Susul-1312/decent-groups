@@ -5,13 +5,17 @@
 		<script>
 			const electron = require('electron')
 			const {ipcRenderer} = electron
-			function newMessenge(msg){
-
+			function newMessege(msg){
+				
+				var x = document.getElementById("messege")
+				x.textContent = msg
 			}
 		</script>
 	</head>
 	
 	<body>
-		Hello World
+		<div id=messege>
+			
+		 </div>
 	</body>
 </html>
