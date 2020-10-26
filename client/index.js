@@ -1,7 +1,4 @@
-const io = require("socket.io");
 const { app, BrowserWindow, ipcMain } = require('electron')
-
-var connection;
 
 var win;
 
@@ -25,15 +22,18 @@ app.on('window-all-closed', () => {
 	}
 });
 
+var socket;
+
 ipcMain.on('server:connect', (event, address) => {
-	connection = io(address);
-	io.on('get message', (msg) => {
+	socket = require('socket.io-client')(address);
+
+	socket.on('get msg', (msg) => {
 		win.executeJavaScript(`newMessage("${msg}")`);
 		console.log(msg);
 	});
 });
 
 ipcMain.on('message:send', (event, msg) => {
-	connection.emit('send message', msg);
+	socket.emit('send msg', msg);
 	console.log(msg);
 });
