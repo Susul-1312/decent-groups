@@ -27,11 +27,10 @@ app.on('window-all-closed', () => {
 
 ipcMain.on('server:connect', (event, address) => {
 	connection = io(address);
-});
-
-io.on('get message', (msg) => {
-	win.executeJavaScript(`newMessage("${msg}")`);
-	console.log(msg);
+	io.on('get message', (msg) => {
+		win.executeJavaScript(`newMessage("${msg}")`);
+		console.log(msg);
+	});
 });
 
 ipcMain.on('message:send', (event, msg) => {
