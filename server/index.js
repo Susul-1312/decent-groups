@@ -3,8 +3,8 @@ const io = require('socket.io')(server);
 console.log("Started");
 
 io.on('connection', (socket) => {
-	socket.on('msg', (msg) => {
-		io.emit('msg', msg);
+	socket.on('send msg', (msg) => {
+		io.emit('get msg', msg);
 	});
 });
 

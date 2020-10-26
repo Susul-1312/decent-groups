@@ -1,23 +1,36 @@
-// Electron
-
+const io = require("socket.io");
 const { app, BrowserWindow, ipcMain } = require('electron')
 
-function createWindow () {
-	const win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		webPreferences: {
-			nodeIntegration: true
-		}
-	})
+var connection;
 
-	win.loadFile('frontend/index.html')
-}
+const win = new BrowserWindow({
+	width: 800,
+	height: 600,
+	webPreferences: {
+		nodeIntegration: true
+	}
+});
 
-app.whenReady().then(createWindow)
+win.loadFile('frontend/index.html');
+
+app.whenReady().then(win);
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit()
 	}
+});
+
+ipcMain.on('server:connect', (event, address) => {
+	connection = io(address);
+});
+
+io.on('get message', (msg) => {
+	win.executeJavaScript(`newMessage("${msg}")`);
+	console.log(msg);
+});
+
+ipcMain.on('message:send', (event, msg) => {
+	connection.emit('send message', msg);
+	console.log(msg);
 });
