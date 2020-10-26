@@ -8,5 +8,7 @@
   },
   "author": "Susi, Edu",
   "license": "GPL-3.0-or-later",
-  "dependencies": {}
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  }
 }
