@@ -5,11 +5,11 @@
 		<script>
 			const electron = require('electron')
 			const {ipcRenderer} = electron
-			function newMessege(msg){
+			ipcRenderer.on("newMessage", (event, msg) => {
 				
 				var x = document.getElementById("messege")
 				x.textContent = msg
-			}
+			});
 		</script>
 	</head>
 	

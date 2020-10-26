@@ -28,7 +28,7 @@ ipcMain.on('server:connect', (event, address) => {
 	socket = require('socket.io-client')(address);
 
 	socket.on('get msg', (msg) => {
-		win.executeJavaScript(`newMessage("${msg}")`);
+		win.webContents.send("newMessage", msg);
 		console.log(msg);
 	});
 });
