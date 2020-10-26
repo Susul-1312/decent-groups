@@ -10,6 +10,7 @@
   "author": "Susi, Edu",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "electron": "^10.1.5"
+    "electron": "^10.1.5",
+    "socket.io": "^2.3.0"
   }
 }
